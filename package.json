@@ -1,0 +1,41 @@
+{
+  "name": "baseweb-for-espX",
+  "version": "1.0.0",
+  "description": "Base for use poi to generate a web interface for espX",
+  "scripts": {
+    "dev": "poi",
+    "build": "poi build",
+    "gen": "poi build && npm run generate-ui-bundle:inline && npm run generate-ui-bundle:strip-preload && npm run generate-ui-bundle:compress",
+    "generate-ui-bundle": "npm run generate-ui-bundle:inline && npm run generate-ui-bundle:strip-preload && npm run generate-ui-bundle:compress",
+    "generate-ui-bundle:inline": "mkdir dist/arduino && inliner --nocompress ./dist/web/index.html > dist/arduino/bundle",
+    "generate-ui-bundle:strip-preload": "replace-in-file \"/<link rel=\\\"preload\\\" href=\\\".+\\\" as=\\\".+\\\">/\" \"\" dist/arduino/bundle --isRegex",
+    "generate-ui-bundle:compress": "gzip-all dist/arduino/bundle",
+    "process": "npm run gen && node ./node_modules/gulp/bin/gulp.js"
+  },
+  "author": {
+    "name": "Carlos Henry Cespedes",
+    "email": "chenry@qva2world.com",
+    "url": "https://www.qva2world.com"
+  },
+  "license": "GPL-2.0",
+  "devDependencies": {
+    "axios": "^0.16.1",
+    "del": "^4.0.0",
+    "gulp": "^4.0.0",
+    "gulp-crass": "^0.2.2",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-rename": "^1.4.0",
+    "gulp-replace": "^1.0.0",
+    "gzip-all": "^1.0.0",
+    "inliner": "^1.12.2",
+    "poi": "^9.6.13",
+    "replace-in-file": "^3.0.0-beta.2"
+  },
+  "dependencies": {
+    "bulma": "^0.8.2",
+    "d3": "^5.16.0",
+    "node-sass": "^4.14.0",
+    "vue-router": ">=3.1.6",
+    "vue-socket.io": "^2.1.1-b"
+  }
+}
