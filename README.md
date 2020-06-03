@@ -10,6 +10,19 @@
 
 If you want the build to generate in the folder of your project change the output folder in the file (gulpfile) [./ gulpfile]
 
+How to use
+
+bundle
+AsyncWebServerResponse *response = request->beginResponse(200, "text/plain", "Ok");
+    response->addHeader("Content-Encoding", "gzip");
+    request->send(SPIFFS, "/bundle.gz", String(), false);
+
+.h
+#include "static/bundle.gz.h"
+...
+AsyncWebServerResponse *response = request->beginResponse_P(200, "text/html", bundle_gz, bundle_gz_len);
+response->addHeader("Content-Encoding", "gzip");
+
 ### EVERYBODY
 
 - [ ] Improve this help with more time.
