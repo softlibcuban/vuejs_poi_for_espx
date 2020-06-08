@@ -10,9 +10,10 @@
 
 If you want the build to generate in the folder of your project change the output folder in the file (gulpfile) [./ gulpfile]
 
-How to use
+## How to use
 
-Using bundle.gz file:
+### Using bundle.gz file:
+
 AsyncWebServer server(80);
 server.on("/", HTTP_GET, [](AsyncWebServerRequest* request) {
         AsyncWebServerResponse* response = request->beginResponse(SPIFFS, "/bundle.gz", "text/html");
@@ -20,11 +21,13 @@ server.on("/", HTTP_GET, [](AsyncWebServerRequest* request) {
         request->send(response);
     });
     
-Using bundle.h file:
+### Using bundle.h file:
+
 #include "static/bundle.gz.h"
 ...
 AsyncWebServerResponse *response = request->beginResponse_P(200, "text/html", bundle_gz, bundle_gz_len);
 response->addHeader("Content-Encoding", "gzip");
+
 
 ### EVERYBODY
 
