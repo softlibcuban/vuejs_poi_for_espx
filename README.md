@@ -12,12 +12,15 @@ If you want the build to generate in the folder of your project change the outpu
 
 How to use
 
-bundle
-AsyncWebServerResponse *response = request->beginResponse(200, "text/plain", "Ok");
-    response->addHeader("Content-Encoding", "gzip");
-    request->send(SPIFFS, "/bundle.gz", String(), false);
-
-.h
+Using bundle.gz file:
+AsyncWebServer server(80);
+server.on("/", HTTP_GET, [](AsyncWebServerRequest* request) {
+        AsyncWebServerResponse* response = request->beginResponse(SPIFFS, "/bundle.gz", "text/html");
+        response->addHeader("Content-Encoding", "gzip");
+        request->send(response);
+    });
+    
+Using bundle.h file:
 #include "static/bundle.gz.h"
 ...
 AsyncWebServerResponse *response = request->beginResponse_P(200, "text/html", bundle_gz, bundle_gz_len);
